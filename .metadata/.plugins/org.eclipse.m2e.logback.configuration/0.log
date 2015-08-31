@@ -1,0 +1,9 @@
+2015-08-31 16:38:50,128 [Worker-4] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Collecting project info '/pom.xml' C:\Users\idyczko\Desktop\ExchangeApplication\exchangeapp\pom.xml
+2015-08-31 16:38:50,990 [Worker-4] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.capgemini:exchangeapp:0.0.1-SNAPSHOT @ C:\Users\idyczko\Desktop\ExchangeApplication\exchangeapp\pom.xml.
+2015-08-31 16:38:51,231 [Worker-4] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /exchangeapp/src/main/java
+2015-08-31 16:38:51,234 [Worker-4] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /exchangeapp/src/test/java
+2015-08-31 16:38:51,966 [Worker-4] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Imported and configured 1 project(s) in 1 sec
+2015-08-31 16:38:52,714 [Worker-2] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2015-08-31 16:38:52,715 [Worker-2] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\idyczko\Desktop\ExchangeApplication\exchangeapp\src\main\resources
+2015-08-31 16:38:52,716 [Worker-2] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2015-08-31 16:38:52,717 [Worker-2] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\idyczko\Desktop\ExchangeApplication\exchangeapp\src\test\resources
