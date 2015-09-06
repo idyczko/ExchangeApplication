@@ -16,7 +16,6 @@ public class ExchangeDataProvider {
 		Long key = records.firstKey();
 		ArrayList<Record> recordsList = records.get(key);
 		records.remove(key);
-
 		return recordsList;
 	}
 	
