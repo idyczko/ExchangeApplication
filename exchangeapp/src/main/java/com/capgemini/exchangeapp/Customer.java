@@ -1,5 +1,11 @@
 package com.capgemini.exchangeapp;
 
+import java.math.BigDecimal;
+
+import com.capgemini.exchangeapp.datamodel.CashWallet;
+import com.capgemini.exchangeapp.datamodel.StockWallet;
+import com.capgemini.exchangeapp.strategy.InvestmentStrategy;
+
 public class Customer {
 	private BrokerageHouse brokerageHouse;
 	private CashWallet cashWallet;
@@ -14,19 +20,39 @@ public class Customer {
 		this.investmentStrategy = investmentStrategy;
 	}
 
-	public void makeNextMove() {
+	public Customer(BrokerageHouse brokerageHouse, BigDecimal cash, InvestmentStrategy investmentStrategy) {
+		this.brokerageHouse = brokerageHouse;
+		this.cashWallet = new CashWallet(cash);
+		this.stockWallet = new StockWallet();
+		this.investmentStrategy = investmentStrategy;
+	}
+
+	public Boolean makeNextMove() {
 		investmentStrategy.makeNextMove(this);
-		brokerageHouse.loadNextDayData();
+		return brokerageHouse.loadNextDayData();
 	}
 
 	public void sellStock(String companyName) {
-		cashWallet.receive(brokerageHouse.sellStock(companyName, stockWallet.getStock().get(companyName)));
-		stockWallet.remove(companyName);
+		BigDecimal income = brokerageHouse.sellStock(companyName, stockWallet.getStock().get(companyName));
+		cashWallet.receive(income);
+		if (income.compareTo(new BigDecimal(0)) > 0) {
+			stockWallet.remove(companyName);
+		}
 	}
 
 	public void buyStock(String companyName) {
-	int numberOfStock = brokerageHouse.buyStock(companyName, cashWallet);
-	stockWallet.put(companyName, numberOfStock, brokerageHouse.getPrice(companyName));
+		int numberOfStock = calculateNumberOfStock(companyName, cashWallet.getCash());
+		BigDecimal cashToPay = new BigDecimal(numberOfStock).multiply(brokerageHouse.getPrice(companyName)).multiply(new BigDecimal(1).add(HelperClass.SPREAD)).setScale(2, BigDecimal.ROUND_HALF_EVEN);
+		numberOfStock = brokerageHouse.buyStock(companyName, cashToPay);
+		cashToPay = new BigDecimal(numberOfStock).multiply(brokerageHouse.getPrice(companyName)).multiply(new BigDecimal(1).add(HelperClass.SPREAD));
+		if (numberOfStock != 0 && cashWallet.pay(cashToPay)) {
+			stockWallet.put(companyName, numberOfStock, brokerageHouse.getPrice(companyName));
+		}
+	}
+
+	private int calculateNumberOfStock(String companyName, BigDecimal cash) {
+		return (cash.divide(brokerageHouse.getPrice(companyName).multiply(new BigDecimal(1).add(HelperClass.SPREAD)), 0,
+				BigDecimal.ROUND_DOWN)).intValue();
 	}
 
 	public BrokerageHouse getBrokerageHouse() {
@@ -40,6 +66,5 @@ public class Customer {
 	public StockWallet getStockWallet() {
 		return stockWallet;
 	}
-
 
 }

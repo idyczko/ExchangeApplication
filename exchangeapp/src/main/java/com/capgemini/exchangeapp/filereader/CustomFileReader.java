@@ -1,4 +1,4 @@
-package com.capgemini.exchangeapp;
+package com.capgemini.exchangeapp.filereader;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.TreeMap;
+
+import com.capgemini.exchangeapp.datamodel.Record;
+import com.capgemini.exchangeapp.parser.RecordDataParser;
 
 public class CustomFileReader {
 	public static TreeMap<Long, ArrayList<Record>> readFile(File file) throws IOException {

@@ -1,16 +1,17 @@
-package com.capgemini.exchangeapp;
+package com.capgemini.exchangeapp.datamodel;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 
 public class StockWallet {
 	private HashMap<String, Integer> stock = new HashMap<String, Integer>();
-	private HashMap<String, Float> purchasePrices = new HashMap<String, Float>();
+	private HashMap<String, BigDecimal> purchasePrices = new HashMap<String, BigDecimal>();
 
 	public HashMap<String, Integer> getStock() {
 		return stock;
 	}
 
-	public HashMap<String, Float> getPurchasePrices() {
+	public HashMap<String, BigDecimal> getPurchasePrices() {
 		return purchasePrices;
 	}
 
@@ -19,7 +20,7 @@ public class StockWallet {
 		purchasePrices.remove(companyName);
 	}
 
-	public void put(String companyName, int numberOfStock, float purchasePrice) {
+	public void put(String companyName, int numberOfStock, BigDecimal purchasePrice) {
 		stock.put(companyName, numberOfStock);
 		purchasePrices.put(companyName, purchasePrice);
 	}
