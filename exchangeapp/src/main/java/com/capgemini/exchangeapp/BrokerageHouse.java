@@ -63,7 +63,7 @@ public class BrokerageHouse {
 		for (String companyName : sortedKeySet) {
 			mostAttractiveStocks.add(mostAttractiveStocks.size(), companyName);
 			stocksFound++;
-			if (stocksFound >= numberOfCompanies || stocksFound>=sortedKeySet.size()) {
+			if (stocksFound >= numberOfCompanies || stocksFound >= sortedKeySet.size()) {
 				break;
 			}
 		}
@@ -108,8 +108,8 @@ public class BrokerageHouse {
 	public void getReport() {
 		for (String companyName : data.keySet()) {
 			Statistics statistics = data.get(companyName);
-			System.out.println(companyName + " " + statistics.getCurrentPrice() + " " + statistics.getDailyChange() + " "
-					+ statistics.getDailyPercentageChange());
+			System.out.println(companyName + " " + statistics.getCurrentPrice() + " " + statistics.getDailyChange()
+					+ " " + statistics.getDailyPercentageChange());
 		}
 	}
 
@@ -125,12 +125,12 @@ public class BrokerageHouse {
 		return data.get(companyName).getDailyChange();
 	}
 
-	public HashMap<String, Statistics> getData() {
-		return data;
-	}
-
 	public CashWallet getHouseIncome() {
 		return houseIncome;
+	}
+
+	public int getCompaniesNumber() {
+		return data.size();
 	}
 
 }
