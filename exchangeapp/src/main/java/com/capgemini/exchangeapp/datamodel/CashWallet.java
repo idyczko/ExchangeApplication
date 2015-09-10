@@ -3,7 +3,7 @@ package com.capgemini.exchangeapp.datamodel;
 import java.math.BigDecimal;
 
 public class CashWallet {
-	public BigDecimal cash;
+	private BigDecimal cash;
 
 	public CashWallet(BigDecimal cash) {
 		this.cash = cash;

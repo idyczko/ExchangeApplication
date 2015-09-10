@@ -8,6 +8,14 @@ import com.capgemini.exchangeapp.comparator.PercentageChangeComparator;
 import com.capgemini.exchangeapp.strategy.InvestmentStrategy;
 
 public class PercentageChangeObservation implements InvestmentStrategy {
+	private Boolean inverted = false;
+	
+	public PercentageChangeObservation() {
+	}
+	
+	public PercentageChangeObservation(boolean inverted) {
+		this.inverted=inverted;
+	}
 
 	public void makeNextMove(Customer customer) {
 		ArrayList<String> stockToSell = findStockToSell(customer);
@@ -15,10 +23,8 @@ public class PercentageChangeObservation implements InvestmentStrategy {
 			customer.sellStock(companyName);
 		}
 		String mostAttractiveStock = customer.getBrokerageHouse()
-				.getMostAttractiveStock(new PercentageChangeComparator());
-		System.out.println(mostAttractiveStock);
-		if (customer.getBrokerageHouse().getDailyPercentageChange(mostAttractiveStock).floatValue()>0) {
-			System.out.println(mostAttractiveStock);
+				.getMostAttractiveStock(new PercentageChangeComparator(inverted));
+		if (customer.getBrokerageHouse().getDailyPercentageChange(mostAttractiveStock).compareTo(new BigDecimal(0))>0) {
 			customer.buyStock(mostAttractiveStock);
 		}
 	}

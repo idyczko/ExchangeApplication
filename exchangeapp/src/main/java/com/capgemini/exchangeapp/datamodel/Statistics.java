@@ -9,12 +9,12 @@ public class Statistics {
 
 	public Statistics(BigDecimal currentPrice) {
 		this.currentPrice = currentPrice;
-		this.dailyPercentageChange = new BigDecimal(0).setScale(4, BigDecimal.ROUND_HALF_EVEN);
+		this.dailyPercentageChange = new BigDecimal(0).setScale(2, BigDecimal.ROUND_HALF_EVEN);
 		this.dailyChange = new BigDecimal(0).setScale(2, BigDecimal.ROUND_HALF_EVEN);
 	}
 
 	public void updatePrice(BigDecimal newPrice) {
-		this.dailyPercentageChange = newPrice.subtract(currentPrice).divide(currentPrice, 4, BigDecimal.ROUND_HALF_EVEN).multiply(new BigDecimal(100));
+		this.dailyPercentageChange = newPrice.subtract(currentPrice).divide(currentPrice, 4, BigDecimal.ROUND_HALF_EVEN).multiply(new BigDecimal(100)).setScale(2);
 		this.dailyChange = newPrice.subtract(currentPrice);
 		this.currentPrice = newPrice;
 	}
