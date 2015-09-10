@@ -7,26 +7,28 @@ public class StockWallet {
 	private HashMap<String, Integer> stock = new HashMap<String, Integer>();
 	private HashMap<String, BigDecimal> purchasePrices = new HashMap<String, BigDecimal>();
 
-	public HashMap<String, Integer> getStock() {
-		return stock;
-	}
-
-	public BigDecimal getPurchasePrice(String companyName) {
-		return purchasePrices.get(companyName);
-	}
-
 	public void remove(String companyName) {
 		stock.remove(companyName);
 		purchasePrices.remove(companyName);
 	}
 
 	public void remove(String companyName, Integer stockNumber) {
-		if (stock.get(companyName) > stockNumber) {
-			stock.put(companyName, stock.get(companyName) - stockNumber);
-		}
 		if (stock.get(companyName) == stockNumber) {
 			remove(companyName);
+			return;
 		}
+		if (stock.get(companyName) > stockNumber) {
+			stock.put(companyName, stock.get(companyName) - stockNumber);
+			System.out.println(stock.get(companyName));
+		}
+	}
+
+	private BigDecimal calculateAveragePrice(String companyName, Integer numberOfStock, BigDecimal purchasePrice) {
+		Integer currentStocks = stock.get(companyName);
+		BigDecimal currentPurchasePrice = purchasePrices.get(companyName);
+		return ((currentPurchasePrice.multiply(new BigDecimal(currentStocks)))
+				.add(purchasePrice.multiply(new BigDecimal(numberOfStock))))
+						.divide(new BigDecimal(numberOfStock + currentStocks), 2, BigDecimal.ROUND_DOWN);
 	}
 
 	public void put(String companyName, Integer numberOfStock, BigDecimal purchasePrice) {
@@ -42,10 +44,12 @@ public class StockWallet {
 		purchasePrices.put(companyName, purchasePrice);
 	}
 
-	private BigDecimal calculateAveragePrice(String companyName, Integer numberOfStock, BigDecimal purchasePrice) {
-		return (purchasePrices.get(companyName)
-				.multiply(new BigDecimal(stock.get(companyName)).add(purchasePrice.add(new BigDecimal(numberOfStock)))))
-						.divide(new BigDecimal(numberOfStock + stock.get(companyName)), 2, BigDecimal.ROUND_DOWN);
+	public BigDecimal getPurchasePrice(String companyName) {
+		return purchasePrices.get(companyName);
+	}
+
+	public HashMap<String, Integer> getStock() {
+		return stock;
 	}
 
 }

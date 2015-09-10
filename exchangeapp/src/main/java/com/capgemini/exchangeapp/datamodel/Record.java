@@ -6,8 +6,6 @@ public class Record{
 private String companyName;
 private BigDecimal price;
 
-
-
 public Record(String companyName, BigDecimal price) {
 	this.companyName = companyName;
 	this.price = price;

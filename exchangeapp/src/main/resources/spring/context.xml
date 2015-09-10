@@ -11,8 +11,4 @@
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<context:annotation-config/>
-	
-	<bean> class</bean>>
-
 </beans>
