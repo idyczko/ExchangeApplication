@@ -1,4 +1,4 @@
-package com.capgemini.exchangeapp;
+package com.capgemini.exchangeapp.datamodel;
 
 import static org.junit.Assert.*;
 

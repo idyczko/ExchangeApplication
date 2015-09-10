@@ -1,4 +1,4 @@
-package com.capgemini.exchangeapp;
+package com.capgemini.exchangeapp.main;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,6 +6,10 @@ import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.ArrayList;
 
+import com.capgemini.exchangeapp.BrokerageHouse;
+import com.capgemini.exchangeapp.Customer;
+import com.capgemini.exchangeapp.ExchangeDataProvider;
+import com.capgemini.exchangeapp.HelperClass;
 import com.capgemini.exchangeapp.strategy.impl.DirectIncomeObservation;
 
 public class App {
