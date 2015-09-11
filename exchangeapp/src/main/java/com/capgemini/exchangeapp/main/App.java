@@ -6,9 +6,6 @@ import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.ArrayList;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import com.capgemini.exchangeapp.BrokerageHouse;
 import com.capgemini.exchangeapp.Customer;
 import com.capgemini.exchangeapp.ExchangeDataProvider;

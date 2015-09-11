@@ -1,0 +1,111 @@
+
+.AnchorPane {
+	-fx-background-color: #0A2933;
+}
+
+
+.AnchorPane .label {
+	-fx-font-size: 15.0px;	
+	-fx-text-fill: white;
+}
+
+.SplitPane .paneTitle {
+	-fx-font-size: 22.0px;	
+}
+
+.SplitPane {
+	-fx-border-color: black;
+}
+
+.text-field {
+	-fx-background-color:#007ACC;	
+	-fx-border-color: white;
+}
+
+.button {
+    -fx-border-color: #e2e2e2;
+    -fx-border-width: 1;
+    -fx-border-style: solid;
+    -fx-background-color: #1d1d1d;
+    -fx-text-fill: white;
+}
+
+.button:hover {
+    -fx-background-color: #3a3a3a;
+}
+
+.button:pressed{
+  -fx-background-color: #1d1d1d;
+  -fx-text-fill: white;
+}
+
+.button:disabled {
+    -fx-opacity: 0.4;
+    -fx-background-color: #1d1d1d;
+    -fx-text-fill: white;
+}
+
+.table-view {
+    -fx-base: #1d1d1d;
+    -fx-control-inner-background: #1d1d1d;
+    -fx-background-color: #1d1d1d;
+    -fx-padding: 5;
+}
+
+
+.table-view .column-header .label {
+    -fx-font-size: 30pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: white;
+    -fx-alignment: center-left;
+    -fx-opacity: 1;
+}
+.table-view .column-header {
+ -fx-border-color: white;
+}
+
+
+.table-view .table-row-cell {
+	-fx-font-size: 25pt;
+}
+
+.table-view .table-row-cell:selected {
+	-fx-font-size: 27pt;
+}
+
+.table-view .table-row-cell:hover {
+	-fx-background-color: #33CCFF;
+}
+
+.split-pane:vertical > .split-pane-divider {
+    -fx-border-color: black;
+    -fx-background-color: transparent, derive(#1d1d1d,20%);
+}
+
+.AnchorPane .SplitPane .SplitPane .AnchorPane .table-view .column-header .label {
+    -fx-font-size: 17pt;
+}
+.AnchorPane .SplitPane .SplitPane .AnchorPane .table-view .table-row-cell:selected {
+	-fx-font-size: 16pt;
+}
+.AnchorPane .SplitPane .SplitPane .AnchorPane .table-view .table-row-cell {
+	-fx-font-size: 15pt;
+}
+.split-pane:horizontal > .split-pane-divider {
+    -fx-border-color: transparent #1d1d1d;
+    -fx-background-color: transparent, derive(#1d1d1d,20%);
+}
+
+
+.menu-bar {
+    -fx-background-color: derive(#1d1d1d,20%);
+}
+
+.context-menu {
+    -fx-background-color: derive(#1d1d1d,50%);
+}
+
+.menu-bar .label {
+    -fx-font-size: 14pt;
+    -fx-text-fill: white;
+}
