@@ -10,15 +10,16 @@ import com.capgemini.exchangeapp.BrokerageHouse;
 import com.capgemini.exchangeapp.Customer;
 import com.capgemini.exchangeapp.ExchangeDataProvider;
 import com.capgemini.exchangeapp.HelperClass;
+import com.capgemini.exchangeapp.exception.RecordParsingException;
 import com.capgemini.exchangeapp.strategy.impl.DirectIncomeObservation;
 
 public class App {
 
-	public static void main(String[] args) throws IOException, ParseException {
+	public static void main(String[] args) throws IOException, ParseException, RecordParsingException {
 		ExchangeDataProvider dataProvider = new ExchangeDataProvider(new File(HelperClass.FILE_PATH));
 		BrokerageHouse brokerageHouse = new BrokerageHouse(dataProvider);
 		Customer customer = new Customer(brokerageHouse, HelperClass.INITIAL_CASH,
-				new DirectIncomeObservation(new BigDecimal(0.01)));
+				new DirectIncomeObservation(new BigDecimal("0.01")));
 
 		customer.getReport();
 		while (customer.makeNextMove()) {

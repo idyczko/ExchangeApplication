@@ -1,6 +1,7 @@
 package com.capgemini.exchangeapp;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -40,6 +41,12 @@ public class Customer {
 		BigDecimal income = brokerageHouse.sellStock(companyName, stockWallet.getStock().get(companyName));
 		cashWallet.receive(income);
 		stockWallet.remove(companyName);
+	}
+	
+	public void sellStock(ArrayList<String> stocks) {
+		for(String companyName: stocks){
+			sellStock(companyName);
+		}
 	}
 
 	public void buyStock(String companyName) {

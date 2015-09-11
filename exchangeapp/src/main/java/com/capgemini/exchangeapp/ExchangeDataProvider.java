@@ -8,12 +8,13 @@ import java.util.Date;
 import java.util.TreeMap;
 
 import com.capgemini.exchangeapp.datamodel.Record;
+import com.capgemini.exchangeapp.exception.RecordParsingException;
 import com.capgemini.exchangeapp.filereader.CustomFileReader;
 
 public class ExchangeDataProvider {
 	private TreeMap<Date, ArrayList<Record>> records = new TreeMap<Date, ArrayList<Record>>();
 
-	public ExchangeDataProvider(File file) throws IOException, ParseException {
+	public ExchangeDataProvider(File file) throws IOException, ParseException, RecordParsingException {
 		records = CustomFileReader.readFile(file);
 	}
 	

@@ -12,10 +12,11 @@ import java.util.Date;
 import java.util.TreeMap;
 
 import com.capgemini.exchangeapp.datamodel.Record;
+import com.capgemini.exchangeapp.exception.RecordParsingException;
 import com.capgemini.exchangeapp.parser.RecordDataParser;
 
 public class CustomFileReader {
-	public static TreeMap<Date, ArrayList<Record>> readFile(File file) throws IOException, ParseException {
+	public static TreeMap<Date, ArrayList<Record>> readFile(File file) throws IOException, ParseException, RecordParsingException {
 		TreeMap<Date, ArrayList<Record>> records = new TreeMap<Date, ArrayList<Record>>();
 		BufferedReader reader = new BufferedReader(new FileReader(file));
 		String line;

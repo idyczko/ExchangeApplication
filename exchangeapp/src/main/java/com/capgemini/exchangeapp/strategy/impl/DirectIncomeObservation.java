@@ -19,12 +19,18 @@ public class DirectIncomeObservation implements InvestmentStrategy {
 	}
 
 	public void makeNextMove(Customer customer) {
-		ArrayList<String> stockToSell = findStockToSell(customer);
-		for (String companyName : stockToSell) {
-			customer.sellStock(companyName);
-		}
-		ArrayList<String> mostAttractiveStocks = customer.getBrokerageHouse().getMostAttractiveStock(
-				new StockPriceComparator(), random.nextInt(customer.getBrokerageHouse().getCompaniesNumber() + 1));
+		sellStocks(customer);
+		buyStocks(customer);
+	}
+
+	private void sellStocks(Customer customer) {
+		customer.sellStock(findStocksToSell(customer));
+	}
+
+	private void buyStocks(Customer customer) {
+		int differentStocksToBuy = random.nextInt(customer.getBrokerageHouse().getCompaniesNumber() + 1);
+		ArrayList<String> mostAttractiveStocks = customer.getBrokerageHouse()
+				.getMostAttractiveStock(new StockPriceComparator(), differentStocksToBuy);
 		for (String companyName : mostAttractiveStocks) {
 			BigDecimal cashToSpend = customer.getCashWallet().getCash()
 					.divide(new BigDecimal(mostAttractiveStocks.size()), 2, BigDecimal.ROUND_FLOOR);
@@ -32,19 +38,19 @@ public class DirectIncomeObservation implements InvestmentStrategy {
 		}
 	}
 
-	private ArrayList<String> findStockToSell(Customer customer) {
+	private ArrayList<String> findStocksToSell(Customer customer) {
 		ArrayList<String> stockToSell = new ArrayList<String>();
 		for (String companyName : customer.getStockWallet().getStock().keySet()) {
-			BigDecimal purchasePrice = customer.getStockWallet().getPurchasePrice(companyName);
-			BigDecimal currentPrice = customer.getBrokerageHouse().calculateWholeTransactionCost(companyName, 1);
-			if (canMakeEnoughCash(purchasePrice, currentPrice)) {
+			if (canMakeEnoughCash(customer, companyName)) {
 				stockToSell.add(companyName);
 			}
 		}
 		return stockToSell;
 	}
 
-	private boolean canMakeEnoughCash(BigDecimal purchasePrice, BigDecimal currentPrice) {
+	private boolean canMakeEnoughCash(Customer customer, String companyName) {
+		BigDecimal purchasePrice = customer.getStockWallet().getPurchasePrice(companyName);
+		BigDecimal currentPrice = customer.getBrokerageHouse().calculateWholeTransactionCost(companyName, 1);
 		return (purchasePrice.subtract(currentPrice)).divide(purchasePrice, 4, BigDecimal.ROUND_CEILING)
 				.multiply(new BigDecimal(100)).compareTo(returnRate) > 0;
 	}
