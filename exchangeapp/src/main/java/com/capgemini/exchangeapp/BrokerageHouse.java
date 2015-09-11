@@ -6,8 +6,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
 
-import org.springframework.stereotype.Service;
-
 import com.capgemini.exchangeapp.datamodel.CashWallet;
 import com.capgemini.exchangeapp.datamodel.Record;
 import com.capgemini.exchangeapp.datamodel.Statistics;
@@ -16,7 +14,6 @@ import com.google.common.collect.ImmutableSortedMap;
 import com.google.common.collect.ImmutableSortedSet;
 import com.google.common.collect.Ordering;
 
-@Service
 public class BrokerageHouse {
 	private ExchangeDataProvider exchangeDataProvider;
 	private CashWallet houseIncome = new CashWallet(new BigDecimal(0));

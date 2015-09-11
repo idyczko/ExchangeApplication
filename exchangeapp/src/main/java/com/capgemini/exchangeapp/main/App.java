@@ -21,17 +21,10 @@ public class App {
 		Customer customer = new Customer(brokerageHouse, HelperClass.INITIAL_CASH,
 				new DirectIncomeObservation(new BigDecimal("0.01")));
 
-		customer.getReport();
 		while (customer.makeNextMove()) {
 		}
-		ArrayList<String> list = new ArrayList<String>();
-
-		for (String company : customer.getStockWallet().getStock().keySet()) {
-			list.add(company);
-		}
-		for (String company : list) {
-			customer.sellStock(company);
-		}
+		
+		customer.sellStock(new ArrayList<String>(customer.getStockWallet().getStock().keySet()));
 
 		customer.getReport();
 	}

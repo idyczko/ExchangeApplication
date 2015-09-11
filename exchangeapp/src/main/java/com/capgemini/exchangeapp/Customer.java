@@ -3,26 +3,15 @@ package com.capgemini.exchangeapp;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.capgemini.exchangeapp.datamodel.CashWallet;
 import com.capgemini.exchangeapp.datamodel.StockWallet;
 import com.capgemini.exchangeapp.strategy.InvestmentStrategy;
 
 public class Customer {
-	@Autowired
 	private BrokerageHouse brokerageHouse;
 	private CashWallet cashWallet;
 	private StockWallet stockWallet;
 	private InvestmentStrategy investmentStrategy;
-
-	public Customer(BrokerageHouse brokerageHouse, CashWallet cashWallet, StockWallet stockWallet,
-			InvestmentStrategy investmentStrategy) {
-		this.brokerageHouse = brokerageHouse;
-		this.cashWallet = cashWallet;
-		this.stockWallet = stockWallet;
-		this.investmentStrategy = investmentStrategy;
-	}
 
 	public Customer(BrokerageHouse brokerageHouse, BigDecimal cash, InvestmentStrategy investmentStrategy) {
 		this.brokerageHouse = brokerageHouse;
@@ -33,7 +22,6 @@ public class Customer {
 
 	public Boolean makeNextMove() {
 		investmentStrategy.makeNextMove(this);
-		getReport();
 		return brokerageHouse.loadNextDayData();
 	}
 

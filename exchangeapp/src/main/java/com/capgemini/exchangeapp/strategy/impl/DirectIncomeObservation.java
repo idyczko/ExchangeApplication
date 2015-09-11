@@ -2,14 +2,16 @@ package com.capgemini.exchangeapp.strategy.impl;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Random;
 
 import com.capgemini.exchangeapp.Customer;
 import com.capgemini.exchangeapp.comparator.StockPriceComparator;
+import com.capgemini.exchangeapp.datamodel.Statistics;
 import com.capgemini.exchangeapp.strategy.InvestmentStrategy;
 
 public class DirectIncomeObservation implements InvestmentStrategy {
-
+	private Comparator<Statistics> comparator=new StockPriceComparator();
 	private BigDecimal returnRate;
 	private Random random = new Random();
 
@@ -30,7 +32,7 @@ public class DirectIncomeObservation implements InvestmentStrategy {
 	private void buyStocks(Customer customer) {
 		int differentStocksToBuy = random.nextInt(customer.getBrokerageHouse().getCompaniesNumber() + 1);
 		ArrayList<String> mostAttractiveStocks = customer.getBrokerageHouse()
-				.getMostAttractiveStock(new StockPriceComparator(), differentStocksToBuy);
+				.getMostAttractiveStock(comparator, differentStocksToBuy);
 		for (String companyName : mostAttractiveStocks) {
 			BigDecimal cashToSpend = customer.getCashWallet().getCash()
 					.divide(new BigDecimal(mostAttractiveStocks.size()), 2, BigDecimal.ROUND_FLOOR);
