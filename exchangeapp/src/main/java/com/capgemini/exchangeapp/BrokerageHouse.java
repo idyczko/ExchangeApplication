@@ -26,7 +26,16 @@ public class BrokerageHouse {
 
 	public Boolean loadNextDayData() {
 		try {
-			loadData(exchangeDataProvider.getNextDayRecords());
+			ArrayList<Record> newRecords = exchangeDataProvider.getNextDayRecords();
+			if (data.isEmpty()) {
+				for (Record record : newRecords) {
+					data.put(record.getCompanyName(), new Statistics(record.getPrice()));
+				}
+				return true;
+			}
+			for (Record record : newRecords) {
+				data.get(record.getCompanyName()).updatePrice(record.getPrice());
+			}
 			return true;
 		} catch (NoSuchElementException e) {
 			return false;
@@ -85,12 +94,6 @@ public class BrokerageHouse {
 
 	private BigDecimal calculateSpread(BigDecimal turnover) {
 		return turnover.multiply(HelperClass.SPREAD).setScale(2, BigDecimal.ROUND_CEILING);
-	}
-	
-	private void loadData(ArrayList<Record> firstRecords) {
-		for (Record record : firstRecords) {
-			data.put(record.getCompanyName(), new Statistics(record.getPrice()));
-		}
 	}
 
 	public void getReport() {
