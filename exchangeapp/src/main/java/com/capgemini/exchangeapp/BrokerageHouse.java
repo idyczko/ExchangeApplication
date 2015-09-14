@@ -121,4 +121,8 @@ public class BrokerageHouse {
 		return data.size();
 	}
 
+	public HashMap<String, Statistics> getData() {
+		return this.data;
+	}
+
 }

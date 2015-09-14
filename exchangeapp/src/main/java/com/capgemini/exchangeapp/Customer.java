@@ -10,18 +10,26 @@ import com.capgemini.exchangeapp.strategy.InvestmentStrategy;
 public class Customer {
 	private BrokerageHouse brokerageHouse;
 	private CashWallet cashWallet;
-	private StockWallet stockWallet;
+	private StockWallet stockWallet = new StockWallet();
 	private InvestmentStrategy investmentStrategy;
+	private Boolean automatic = false;
+
+	public Customer(BrokerageHouse brokerageHouse, BigDecimal cash) {
+		this.brokerageHouse = brokerageHouse;
+		this.cashWallet = new CashWallet(cash);
+	}
 
 	public Customer(BrokerageHouse brokerageHouse, BigDecimal cash, InvestmentStrategy investmentStrategy) {
 		this.brokerageHouse = brokerageHouse;
 		this.cashWallet = new CashWallet(cash);
-		this.stockWallet = new StockWallet();
 		this.investmentStrategy = investmentStrategy;
+		this.automatic = true;
 	}
 
 	public Boolean makeNextMove() {
-		investmentStrategy.makeNextMove(this);
+		if (automatic) {
+			investmentStrategy.makeNextMove(this);
+		}
 		return brokerageHouse.loadNextDayData();
 	}
 
@@ -30,9 +38,9 @@ public class Customer {
 		cashWallet.receive(income);
 		stockWallet.remove(companyName);
 	}
-	
+
 	public void sellStock(ArrayList<String> stocks) {
-		for(String companyName: stocks){
+		for (String companyName : stocks) {
 			sellStock(companyName);
 		}
 	}
@@ -40,6 +48,14 @@ public class Customer {
 	public void buyStock(String companyName) {
 		BigDecimal cashToPay = brokerageHouse.calculateWholeTransactionCost(companyName,
 				brokerageHouse.calculateStockNumber(companyName, cashWallet.getCash()));
+		if (cashWallet.pay(cashToPay)) {
+			Integer numberOfStock = brokerageHouse.buyStock(companyName, cashToPay);
+			stockWallet.put(companyName, numberOfStock, brokerageHouse.getPrice(companyName));
+		}
+	}
+
+	public void buyStock(String companyName, Integer quantity) {
+		BigDecimal cashToPay = brokerageHouse.calculateWholeTransactionCost(companyName, quantity);
 		if (cashWallet.pay(cashToPay)) {
 			Integer numberOfStock = brokerageHouse.buyStock(companyName, cashToPay);
 			stockWallet.put(companyName, numberOfStock, brokerageHouse.getPrice(companyName));

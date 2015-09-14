@@ -70,24 +70,25 @@
                                           <Insets left="10.0" />
                                        </padding>
                                     </Label>
-                                    <ComboBox prefWidth="150.0" GridPane.rowIndex="1" />
-                                    <ComboBox prefWidth="150.0" GridPane.rowIndex="3" />
-                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                    <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="104.0" text="Buy" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                    <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="125.0" text="Sell" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                    <ComboBox fx:id="companiesToBuy" prefWidth="150.0" GridPane.rowIndex="1" />
+                                    <ComboBox fx:id="companiesToSell" prefWidth="150.0" GridPane.rowIndex="3" />
+                                    <TextField fx:id="stocksToBuy" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <TextField fx:id="stocksToSell" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <Button fx:id="buyButton" mnemonicParsing="false" onAction="#buyStock" prefHeight="33.0" prefWidth="104.0" text="Buy" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                    <Button fx:id="sellButton" mnemonicParsing="false" prefHeight="33.0" prefWidth="125.0" text="Sell" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                                  </children>
                               </GridPane>
-                              <Button layoutX="309.0" layoutY="567.0" mnemonicParsing="false" text="Next Day" />
-                              <Label layoutX="27.0" layoutY="14.0" text="Label" />
+                              <Button fx:id="nextDayButton" onAction="#loadNextDay" layoutX="309.0" layoutY="567.0" mnemonicParsing="false" text="Next Day" />
+                              <Label fx:id="customerCash" layoutX="27.0" layoutY="14.0" text="Label" />
                            </children>
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                            <children>
-                              <TableView layoutX="94.0" layoutY="46.0" prefHeight="362.0" prefWidth="406.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <TableView fx:id="customerStockTable" layoutX="94.0" layoutY="46.0" prefHeight="362.0" prefWidth="406.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <columns>
-                                  <TableColumn prefWidth="75.0" text="C1" />
-                                  <TableColumn prefWidth="75.0" text="C2" />
+                                  <TableColumn fx:id="customerCompanyNameColumn" prefWidth="221.0" text="Company Name" />
+                                  <TableColumn fx:id="purchasePriceColumn" prefWidth="90.0" text="Purchase price" />
+                                    <TableColumn fx:id="stocksNumberColumn" prefWidth="86.0" text="Quantity" />
                                 </columns>
                               </TableView>
                            </children>
@@ -100,8 +101,10 @@
                <children>
                   <TableView fx:id="recordTable" layoutX="328.0" layoutY="163.0" prefHeight="986.0" prefWidth="1502.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
+                      <TableColumn fx:id="companyNameColumn" prefWidth="356.0" text="Company Name" />
+                      <TableColumn fx:id="stockPriceColumn" minWidth="0.0" prefWidth="256.0" text="Stock Price" />
+                        <TableColumn fx:id="percentageChangeColumn" minWidth="0.0" prefWidth="441.0" text="Percentage Change" />
+                        <TableColumn fx:id="changeColumn" minWidth="8.0" prefWidth="271.0" text="Change" />
                     </columns>
                   </TableView>
                </children>
