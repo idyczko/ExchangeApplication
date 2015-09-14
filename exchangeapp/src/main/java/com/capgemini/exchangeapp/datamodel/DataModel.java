@@ -4,12 +4,16 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
+import javafx.beans.binding.ListExpression;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class DataModel {
 	private final StringProperty customerCash = new SimpleStringProperty();
@@ -29,6 +33,12 @@ public class DataModel {
 
 	private final ListProperty<StockVO> customerStocksList = new SimpleListProperty<StockVO>(
 			FXCollections.observableList(new ArrayList<StockVO>()));
+	
+	private final ListProperty<String> companiesNamesList = new SimpleListProperty<String>(
+			FXCollections.observableList(new ArrayList<String>()));
+	
+	private final ListProperty<String> customerCompaniesNamesList = new SimpleListProperty<String>(
+			FXCollections.observableList(new ArrayList<String>()));
 
 	public final void setCustomerCash(BigDecimal cash) {
 		customerCash.set(cash.toString());
@@ -125,5 +135,22 @@ public class DataModel {
 	public final ListProperty<StockVO> customerStocksListProperty() {
 		return customerStocksList;
 	}
+
+	public final ListProperty<String> companiesNamesProperty() {
+		return companiesNamesList;
+	}
+	
+	public final ListProperty<String> customerCompaniesNamesProperty() {
+		return customerCompaniesNamesList;
+	}
+	
+	public void setCompaniesProperty(Set<String> companyNames){
+		companiesNamesList.setAll(companyNames);
+	}
+	
+	public void setCustomerCompaniesNamesProperty(Set<String> companyNames){
+		customerCompaniesNamesList.setAll(companyNames);
+	}
+
 
 }

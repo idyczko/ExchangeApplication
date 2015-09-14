@@ -78,7 +78,15 @@ public class ExchangeViewController {
 	
 	@FXML
 	private void buyStock(ActionEvent event) {
-		dataProvider.buyStocks(model.getCompanyToBuy(), Integer.parseInt(model.getStocksToBuyNumber()));
+		Integer quantity =  Integer.parseInt(model.getStocksToBuyNumber());
+		dataProvider.buyStocks(model.getCompanyToBuy(), quantity);
+		updateData();
+	}
+
+	@FXML
+	private void sellStock(ActionEvent event) {
+		Integer quantity =  Integer.parseInt(model.getStocksToSellNumber());
+		dataProvider.sellStocks(model.getCompanyToSell(), quantity);
 		updateData();
 	}
 
@@ -89,6 +97,8 @@ public class ExchangeViewController {
 	}
 
 	private void updateData() {
+		model.setCompaniesProperty(dataProvider.getCompanies());
+		model.setCustomerCompaniesNamesProperty(dataProvider.getCustomersCompanyNames());
 		model.setCustomerStocksList(dataProvider.getCustomerStocks());
 		model.setCustomerCash(dataProvider.getCustomerCash());
 		model.setBrokerCash(dataProvider.getBrokerCash());
@@ -118,8 +128,8 @@ public class ExchangeViewController {
 		stocksNumberColumn.setCellValueFactory(cellData -> {
 			return new SimpleStringProperty(cellData.getValue().getNumberOfStocks().toString());
 		});
-		companiesToBuy.getItems().add("Fruit");
-		companiesToSell.getItems().add("Fruit");
+		companiesToBuy.itemsProperty().bind(model.companiesNamesProperty());
+		companiesToSell.itemsProperty().bind(model.customerCompaniesNamesProperty());
 		
 		recordTable.itemsProperty().bind(model.recordsListProperty());
 		customerStockTable.itemsProperty().bind(model.customerStocksListProperty());

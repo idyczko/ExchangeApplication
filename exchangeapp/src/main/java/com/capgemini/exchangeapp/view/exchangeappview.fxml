@@ -75,7 +75,7 @@
                                     <TextField fx:id="stocksToBuy" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                     <TextField fx:id="stocksToSell" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                     <Button fx:id="buyButton" mnemonicParsing="false" onAction="#buyStock" prefHeight="33.0" prefWidth="104.0" text="Buy" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                    <Button fx:id="sellButton" mnemonicParsing="false" prefHeight="33.0" prefWidth="125.0" text="Sell" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                    <Button fx:id="sellButton" mnemonicParsing="false" onAction="#sellStock" prefHeight="33.0" prefWidth="125.0" text="Sell" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                                  </children>
                               </GridPane>
                               <Button fx:id="nextDayButton" onAction="#loadNextDay" layoutX="309.0" layoutY="567.0" mnemonicParsing="false" text="Next Day" />

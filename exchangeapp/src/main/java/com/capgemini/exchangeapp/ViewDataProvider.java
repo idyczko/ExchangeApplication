@@ -2,6 +2,7 @@ package com.capgemini.exchangeapp;
 
 import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.Set;
 
 import com.capgemini.exchangeapp.datamodel.RecordVO;
 import com.capgemini.exchangeapp.datamodel.StockVO;
@@ -25,5 +26,9 @@ public interface ViewDataProvider {
 	Collection<RecordVO> getExchangeStocks();
 	
 	void setCustomer(Customer customer);
+
+	Set<String> getCompanies();
+
+	Set<String> getCustomersCompanyNames();
 
 }

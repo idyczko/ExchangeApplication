@@ -22,6 +22,7 @@ public class App {
 				new DirectIncomeObservation(new BigDecimal("0.01")));
 
 		while (customer.makeNextMove()) {
+			customer.getReport();
 		}
 
 		customer.sellStock(new ArrayList<String>(customer.getStockWallet().getStock().keySet()));

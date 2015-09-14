@@ -3,6 +3,7 @@ package com.capgemini.exchangeapp;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Set;
 
 import com.capgemini.exchangeapp.datamodel.RecordVO;
 import com.capgemini.exchangeapp.datamodel.Statistics;
@@ -60,6 +61,16 @@ public class ViewDataProviderImpl implements ViewDataProvider {
 	
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+	}
+
+	@Override
+	public Set<String> getCompanies() {
+		return customer.getBrokerageHouse().getData().keySet();
+	}
+
+	@Override
+	public Set<String> getCustomersCompanyNames() {
+		return customer.getStockWallet().getStock().keySet();
 	}
 
 
