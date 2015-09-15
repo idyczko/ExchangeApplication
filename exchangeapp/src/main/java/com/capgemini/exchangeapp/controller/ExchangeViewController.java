@@ -8,6 +8,7 @@ import com.capgemini.exchangeapp.datamodel.StockVO;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.chart.LineChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -72,6 +73,7 @@ public class ExchangeViewController {
 	
 	@FXML
 	private TableColumn<StockVO, String> stocksNumberColumn;
+	
 
 	private final ViewDataProvider dataProvider = ViewDataProvider.INSTANCE;
 	private final DataModel model = new DataModel();
